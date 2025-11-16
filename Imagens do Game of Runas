@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Imagens do Game of Runas</title>
+<style>
+    body {
+        background-color: #1a1a1a;
+        color: #f5f5f5;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding: 20px;
+    }
+    h1 {
+        color: #ff4500;
+        margin-bottom: 30px;
+    }
+    img {
+        border: 3px solid #ff4500;
+        margin: 10px;
+        max-width: 300px;
+        height: auto;
+        border-radius: 5px;
+    }
+    .gallery {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+</style>
+</head>
+<body>
+
+<h1>Imagens do Game of Runas</h1>
+
+<div class="gallery">
+    <img src="jogo.jpg" alt="Jogo 1">
+    <img src="jogo2.jpg" alt="Jogo 2">
+    <img src="jogo3.jpg" alt="Jogo 3">
+    <img src="jogo4.jpg" alt="Jogo 4">
+    <img src="jogo5.jpg" alt="Jogo 5">
+    <img src="jogo6.jpg" alt="Jogo 6">
+    <img src="jogo7.jpg" alt="Jogo 7">
+    <img src="jogo8.jpg" alt="Jogo 8">
+    <img src="jogo9.jpg" alt="Jogo 9">
+</div>
+
+</body>
+</html>
