@@ -3,36 +3,48 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Imagens do Game of Runas</title>
+<title>Galeria de Imagens do Game of Runas</title>
 <style>
     body {
         background-color: #1a1a1a;
         color: #f5f5f5;
-        font-family: Arial, sans-serif;
-        text-align: center;
+        font-family: 'Courier New', monospace;
+        margin: 0;
         padding: 20px;
     }
     h1 {
         color: #ff4500;
+        text-align: center;
         margin-bottom: 30px;
-    }
-    img {
-        border: 3px solid #ff4500;
-        margin: 10px;
-        max-width: 300px;
-        height: auto;
-        border-radius: 5px;
     }
     .gallery {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
+        gap: 15px;
+    }
+    .gallery img {
+        border: 3px solid #ff4500;
+        border-radius: 8px;
+        max-width: 300px;
+        height: auto;
+        transition: transform 0.3s;
+    }
+    .gallery img:hover {
+        transform: scale(1.05);
+    }
+    a.back {
+        display: block;
+        text-align: center;
+        margin-top: 30px;
+        color: #ff4500;
+        text-decoration: underline;
     }
 </style>
 </head>
 <body>
 
-<h1>Imagens do Game of Runas</h1>
+<h1>Galeria de Imagens do Game of Runas</h1>
 
 <div class="gallery">
     <img src="jogo1.jpg" alt="Jogo 1">
@@ -45,6 +57,8 @@
     <img src="jogo8.jpg" alt="Jogo 8">
     <img src="jogo9.jpg" alt="Jogo 9">
 </div>
+
+<a href="index.html" class="back">← Voltar para o Índice</a>
 
 </body>
 </html>
