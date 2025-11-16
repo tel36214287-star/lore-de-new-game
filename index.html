@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trabalho de Exemplo: Game of Runas</title>
+<style>
+    body {
+        background-color: #1a1a1a;
+        color: #f5f5f5;
+        font-family: 'Courier New', monospace;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+    }
+    h1, h2, h3 {
+        color: #ff4500;
+        text-align: center;
+    }
+    h2 {
+        margin-top: 40px;
+        border-bottom: 2px solid #ff4500;
+        padding-bottom: 5px;
+    }
+    code, pre {
+        background-color: #2a2a2a;
+        color: #00ff99;
+        padding: 10px;
+        display: block;
+        overflow-x: auto;
+        border-radius: 5px;
+        margin: 10px 0;
+    }
+    p {
+        text-align: justify;
+    }
+    .section {
+        margin-bottom: 40px;
+    }
+</style>
+</head>
+<body>
+
+<h1>Trabalho de Exemplo: Enredo de Jogo em Python com Scripts de Runas</h1>
+
+<div class="section">
+<h2>Introdução</h2>
+<p>Este projeto apresenta um motor narrativo de runas implementado em Python. Ele demonstra como runas podem interagir com <em>ambientes temáticos</em>, influenciar grupos e criar efeitos narrativos ou estratégicos, simulando batalhas, dominação e suporte em arenas de jogo.</p>
+</div>
+
+<div class="section">
+<h2>Script 1: Runa “Guerrilha” / Sede de Sangue</h2>
+<p><strong>Objetivo:</strong> Simular runas ofensivas em arenas históricas ou campos de batalha.</p>
+<p><strong>Descrição:</strong> A runa é aplicada em um ambiente específico. Se compatível, ativa efeitos ofensivos e retorna informações do grupo afetado e seu poder.</p>
+<pre>
+# ====== Motor de Runas Narrativo ======
+class Runa:
+    def __init__(self, nome, classe):
+        self.nome = nome
+        self.classe = classe
+
+class Ambiente:
+    def __init__(self, nome, enredo):
+        self.nome = nome
+        self.enredo = enredo
+        self.carregado = False
+
+    def carregar(self):
+        print(f"[LOAD] Ambiente '{self.nome}' com enredo: {self.enredo}")
+        self.carregado = True
+
+def aplicar_runa(runa, ambiente):
+    if not ambiente.carregado:
+        ambiente.carregar()
+    print(f"[RUNA] Aplicando '{runa.nome}' no ambiente '{ambiente.nome}'")
+    if runa.nome.lower() == "guerrilha" and "Cuba" in ambiente.nome:
+        print("-> Grupo Guevara assume poder no país!")
+        return {"grupo": "Guevara", "poder": "máximo"}
+    else:
+        print("-> Efeito da runa neutro ou não compatível.")
+        return None
+
+runa1 = Runa("Guerrilha", "Ofensiva")
+amb1 = Ambiente("Cuba (Arena)", "Cuba de Guevara")
+
+resultado = aplicar_runa(runa1, amb1)
+print("Resultado final:", resultado)
+</pre>
+</div>
+
+<div class="section">
+<h2>Script 2: Runa “Sede de Sangue” com inimigo ideológico</h2>
+<p><strong>Objetivo:</strong> Aplicar efeitos ofensivos com verificação de vitória e eliminação de inimigos ideológicos.</p>
+<p><strong>Descrição:</strong> Permite simular conflitos em campos de batalha sangrentos, aumentando ataques e removendo inimigos ideológicos caso o jogador vença.</p>
+<pre>
+class Runa:
+    def __init__(self, nome, classe):
+        self.nome = nome
+        self.classe = classe
+
+class Ambiente:
+    def __init__(self, nome, enredo):
+        self.nome = nome
+        self.enredo = enredo
+        self.carregado = False
+
+    def carregar(self):
+        print(f"[LOAD] Ambiente '{self.nome}' com enredo: {self.enredo}")
+        self.carregado = True
+
+def aplicar_runa(runa, ambiente, jogador_venceu):
+    if not ambiente.carregado:
+        ambiente.carregar()
+    print(f"[RUNA] Aplicando '{runa.nome}' em '{ambiente.nome}'")
+    if jogador_venceu:
+        print(f"-> {runa.nome} ativada: dano aumentado e sustain máximo!")
+        return {"efeito": "sustain + ataque", "intensidade": "máxima"}
+    else:
+        print(f"-> {runa.nome} parcialmente ativada, efeito reduzido.")
+        return {"efeito": "sustain parcial", "intensidade": "média"}
+
+def verificar_ideologia(inimigo_ideologico, jogador_venceu):
+    if jogador_venceu and inimigo_ideologico:
+        print("-> Inimigo ideológico eliminado do território!")
+        return True
+    else:
+        print("-> Conflito ideológico ainda em curso.")
+        return False
+
+runa1 = Runa("Sede de Sangue", "Ofensiva")
+amb1 = Ambiente("Campos de Batalha Sangrentos", "Conflitos intensos e contínuos")
+jogador_venceu = True
+inimigo_ideologico = True
+
+resultado_runa = aplicar_runa(runa1, amb1, jogador_venceu)
+resultado_ideologia = verificar_ideologia(inimigo_ideologico, jogador_venceu)
+print("Resultado da runa:", resultado_runa)
+print("Resultado ideológico:", resultado_ideologia)
+</pre>
+</div>
+
+<div class="section">
+<h2>Script 3: Runa “Oração” – Versão Melhorada</h2>
+<p><strong>Objetivo:</strong> Criar um motor narrativo modular e escalável, com suporte a múltiplos grupos religiosos e efeitos de vitória claros.</p>
+<p><strong>Descrição:</strong> A runa “Oração” permite ao jogador alterar a divindade de grupos inimigos e coletar recursos. A lógica é totalmente modular, facilitando expansão do enredo e novas runas.</p>
+<pre>
+class Ambiente:
+    def __init__(self, nome):
+        self.nome = nome
+        self.carregado = False
+
+    def carregar(self):
+        if not self.carregado:
+            print(f"[LOAD] Mundo ficcional '{self.nome}' carregado")
+            self.carregado = True
+
+class GrupoReligioso:
+    def __init__(self, nome, deus, ouro=0):
+        self.nome = nome
+        self.deus = deus
+        self.ouro = ouro
+
+    def mudar_deus(self, novo_deus):
+        self.deus = novo_deus
+        print(f"-> Grupo '{self.nome}' agora segue '{novo_deus}'!")
+
+class Runa:
+    def __init__(self, nome, ambiente):
+        self.nome = nome
+        self.ambiente = ambiente
+
+    def aplicar(self, player_grupo, grupos_inimigos, player_venceu=True):
+        self.ambiente.carregar()
+        print(f"[RUNA] Aplicando '{self.nome}' no ambiente '{self.ambiente.nome}'")
+        if player_venceu:
+            for g in grupos_inimigos:
+                g.mudar_deus(player_grupo.deus)
+            total_ouro = sum([g.ouro for g in grupos_inimigos]) + 100
+            player_grupo.ouro += total_ouro
+            return {
+                "grupo": player_grupo.nome,
+                "deus": player_grupo.deus,
+                "ouro": player_grupo.ouro,
+                "povos_subjulgados": [g.nome for g in grupos_inimigos]
+            }
+        else:
+            print("-> Batalha perdida, nenhum recurso ganho.")
+            return None
+
+amb_oracao = Ambiente("Arena Religiosa")
+runa_oracao = Runa("Oração", amb_oracao)
+
+grupo_jogador = GrupoReligioso("Ordem do Sol", "Deus do Sol")
+grupos_inimigos = [
+    GrupoReligioso("Círculo Lunar", "Deusa da Lua"),
+    GrupoReligioso("Clã Estelar", "Deus das Estrelas")
+]
+
+resultado = runa_oracao.aplicar(grupo_jogador, grupos_inimigos, player_venceu=True)
+print("Resultado final:", resultado)
+</pre>
+</div>
+
+<div class="section">
+<h2>Conclusão</h2>
+<p>Os scripts apresentados demonstram a construção de um motor narrativo de runas em Python, permitindo interação entre runas, ambientes e grupos. O modelo é modular, escalável e aplicável a diferentes arenas temáticas, servindo como base para desenvolvimento de jogos, grimórios e lore interativo.</p>
+</div>
+
+</body>
+</html>
